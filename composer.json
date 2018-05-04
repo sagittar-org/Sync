@@ -1,0 +1,13 @@
+{
+    "name": "pieni/sync",
+    "description": "Synchronize data between different formats",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "pieni\\Sync\\": "src"
+        }
+    },
+    "require": {
+        "phpoffice/phpspreadsheet": "1.2.1"
+    }
+}
