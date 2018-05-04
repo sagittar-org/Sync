@@ -12,14 +12,14 @@ class Handler
 		}
 	}
 
+	public function mtime($name = '')
+	{
+		return $this->timeInfo($name)[0]['mtime'];
+	}
+
 	public function get($name = '')
 	{
-		$latest = ['mtime' => -2];
-		foreach ($this->drivers as $index => $driver) {
-			if (($mtimes[$index] = $driver->mtime($name)) > $latest['mtime']) {
-				$latest = ['mtime' => $mtimes[$index], 'index' => $index];
-			}
-		}
+		list($latest, $mtimes) = $this->timeInfo($name);
 		$data = $this->drivers[$latest['index']]->get($name);
 		foreach ($this->drivers as $index => $driver) {
 			if ($mtimes[$index] < $latest['mtime']) {
@@ -27,5 +27,16 @@ class Handler
 			}
 		}
 		return $data;
+	}
+
+	private function timeInfo($name)
+	{
+		$latest = ['mtime' => -2];
+		foreach ($this->drivers as $index => $driver) {
+			if (($mtimes[$index] = $driver->mtime($name)) > $latest['mtime']) {
+				$latest = ['mtime' => $mtimes[$index], 'index' => $index];
+			}
+		}
+		return [$latest, $mtimes];
 	}
 }

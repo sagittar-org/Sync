@@ -18,6 +18,9 @@ MIT License
 ### \pieni\Sync\Handler::__construct($name, $drivers)
 - Add drivers to Handler instance
 
+### \pieni\Sync\Handler::mtime($name = '')
+- Return latest driver's modification time
+
 ### \pieni\Sync\Handler::get($name = '')
 - Get data from the latest driver
 - Put data to non-latest drivers
