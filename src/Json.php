@@ -21,6 +21,7 @@ class Json implements Driver
 
 	public function put($data, $mtime, $name = '')
 	{
+		@mkdir(dirname($this->file($name)), 0755, true);
 		file_put_contents($this->file($name), json_encode($data, JSON_PRETTY_PRINT)."\n");
 		touch($this->file($name), $mtime);
 	}

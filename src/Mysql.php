@@ -18,7 +18,7 @@ class Mysql implements Driver
 
 	public function get($name = '')
 	{
-		$columns = end($this->handler->drivers)->columns;
+		$columns = end($this->handler->drivers)::$columns;
 		foreach (array_keys($columns) as $table) {
 			$data[$table] = [];
 			$result = $this->db->query("SELECT `".(implode('`, `', array_merge(['id'], $columns[$table])))."` FROM `".$this->database_name($name)."`.`{$table}` ORDER BY `id` ASC");
@@ -32,7 +32,7 @@ class Mysql implements Driver
 
 	public function put($data, $mtime, $name = '')
 	{
-		$columns = end($this->handler->drivers)->columns;
+		$columns = end($this->handler->drivers)::$columns;
 		$this->db->query("CREATE DATABASE IF NOT EXISTS `".$this->database_name($name)."`");
 		foreach (array_keys($columns) as $table) {
 			$rows = $data[$table];

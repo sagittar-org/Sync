@@ -16,12 +16,13 @@ class Excel implements Driver
 
 	public function get($name = '')
 	{
-		$columns = end($this->handler->drivers)->columns;
+		$columns = end($this->handler->drivers)::$columns;
 		$spreadsheet = (new \PhpOffice\PhpSpreadsheet\Reader\Xlsx())->load($this->file($name));
 		foreach (array_keys($columns) as $table) {
 			$data[$table] = [];
 			$sheet = $spreadsheet->getSheetByName($table);
 			for ($r = 2; ($row = $sheet->getCell('A'.$r)->getValue()) !== NULL; $r++) {
+				$data[$table][$row] = [];
 				foreach ($columns[$table] as $c => $column) {
 					$data[$table][$row][$column] = (string) $sheet->getCellByColumnAndRow($c + 2, $r)->getValue();
 				}
@@ -32,7 +33,7 @@ class Excel implements Driver
 
 	public function put($data, $mtime, $name = '')
 	{
-		$columns = end($this->handler->drivers)->columns;
+		$columns = end($this->handler->drivers)::$columns;
 		$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 		$spreadsheet->removeSheetByIndex(0);
 		foreach (array_keys($columns) as $table) {
