@@ -1,7 +1,19 @@
 {
     "name": "pieni/sync",
     "description": "Synchronize data between different formats",
+    "type": "library",
+    "keywords": [
+        "pieni",
+        "cache"
+    ],
+    "homepage": "https://github.com/sagittar-org/pieni",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Sagittarius Systems",
+            "homepage": "https://github.com/sagittar-org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "pieni\\Sync\\": "src"
