@@ -3,7 +3,7 @@ require_once 'vendor/autoload.php';
 
 class Example implements \pieni\Sync\Driver
 {
-	public $columns = ['time' => ['value']];
+	public static $columns = ['time' => ['value']];
 
 	public function __construct($params = [])
 	{
